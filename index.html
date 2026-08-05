@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerInfinity AI — Your AI-Powered Career Intelligence Platform</title>
+    <meta name="description" content="AI-Powered Career Intelligence Platform for Infosys Springboard Internship. Multi-step onboarding, instant resume parsing, match scoring, and SSO single sign-on.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply theme BEFORE render to prevent flash
+        (function() {
+            const t = localStorage.getItem('ci_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+        // PDF.js worker
+        window.addEventListener('load', () => {
+            if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        });
+    </script>
+</head>
+<body id="landing-page-root">
+
+<!-- Glow background blobs -->
+<div class="glow-blob blob-1"></div>
+<div class="glow-blob blob-2"></div>
+
+<div class="landing-page">
+
+    <!-- ===== TOP NAVIGATION ===== -->
+    <nav class="landing-nav">
+        <div class="nav-logo">
+            <div class="nav-logo-icon">🧠</div>
+            <div class="nav-logo-text">Career <span>Infinity</span></div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#whoisit">Who is it for?</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <!-- Theme Toggle Button (Works in both dark & light modes) -->
+            <button class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                <span class="toggle-icon">☀️</span>
+                <span class="toggle-label">Light Mode</span>
+            </button>
+            <button class="btn-nav-signin" onclick="document.getElementById('login-card-anchor').scrollIntoView({behavior:'smooth'})">Sign In</button>
+            <button class="btn-nav-cta" onclick="document.getElementById('login-card-anchor').scrollIntoView({behavior:'smooth'})">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT SPLIT ===== -->
+    <div class="landing-content" id="features">
+
+        <!-- LEFT: Hero Section -->
+        <div class="hero-left">
+            <div class="powered-badge">
+                <i class="fa-solid fa-microchip"></i>
+                Powered by Infosys Springboard AI
+            </div>
+
+            <h1 class="hero-headline">
+                Your <span class="gradient-word">AI-Powered</span> Career Roadmap Begins Here.
+            </h1>
+
+            <p class="hero-subtext">
+                Enter your name, drop your resume, and let our deep AI engine extract your skills, compute your exact career match score, and recommend top Infosys placement drives instantly.
+            </p>
+
+            <!-- Key Hero Metrics -->
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <div class="stat-num">50K+</div>
+                    <div class="stat-lbl">Springboard Interns Placed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">92%</div>
+                    <div class="stat-lbl">Resume Match Accuracy</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">30s</div>
+                    <div class="stat-lbl">Instant AI Analysis</div>
+                </div>
+            </div>
+
+            <!-- Feature Highlights Grid -->
+            <div class="hero-feat-grid">
+                <div class="feat-card">
+                    <div class="feat-ic"><i class="fa-solid fa-file-shield"></i></div>
+                    <div>
+                        <h4>AI Resume Parsing</h4>
+                        <p>Automatically extracts skills, projects, and certificates from your PDF/DOCX.</p>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-ic"><i class="fa-solid fa-bullseye"></i></div>
+                    <div>
+                        <h4>Career Match Score</h4>
+                        <p>Calculates your % alignment with top industry job roles and offers growth tips.</p>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-ic"><i class="fa-solid fa-key"></i></div>
+                    <div>
+                        <h4>One-Click SSO Gateway</h4>
+                        <p>Seamless Single Sign-On with Google, LinkedIn, or Microsoft with persistent session.</p>
+                    </div>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-ic"><i class="fa-solid fa-robot"></i></div>
+                    <div>
+                        <h4>Universal AI Chatbot</h4>
+                        <p>Chat with our AI on every page to understand your scores and discover placement drives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Original Multi-Step Onboarding System -->
+        <div class="hero-right" id="login-card-anchor">
+            <div class="login-card">
+
+                <!-- PERSISTENT SESSION BANNER (shown if already logged in via localStorage) -->
+                <div id="persist-session-banner" class="persist-banner">
+                    <div class="persist-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <h3>Active Session Detected</h3>
+                    <p>You are logged in as <strong id="banner-user-name">User</strong><br>
+                    <span id="banner-user-email" class="persist-email"></span></p>
+                    <button id="btn-continue-dash" class="btn-primary" style="margin-bottom:0.5rem;width:100%;">
+                        <i class="fa-solid fa-gauge-high"></i> Go to Dashboard ➤
+                    </button>
+                    <button id="btn-switch-user" class="btn-secondary" style="margin-bottom:0;width:100%;">
+                        <i class="fa-solid fa-rotate-left"></i> Switch Account
+                    </button>
+                </div>
+
+                <!-- MULTI-STEP ONBOARDING FLOW (#login-steps-wrap) -->
+                <div id="login-steps-wrap">
+                    
+                    <!-- Step progress bar -->
+                    <div class="step-progress-bar">
+                        <div class="step-pip active" id="pip-1" title="Step 1: Name">1</div>
+                        <div class="step-pip" id="pip-2" title="Step 2: Resume Upload">2</div>
+                        <div class="step-pip" id="pip-3" title="Step 3: Sign In">3</div>
+                    </div>
+                    <div class="step-labels">
+                        <span>Your Name</span>
+                        <span>Resume Upload</span>
+                        <span>Sign In</span>
+                    </div>
+
+                    <!-- STEP 1: Name Entry -->
+                    <div class="step-panel active" id="step-1">
+                        <div class="step-header">
+                            <div class="step-avatar-ring">👤</div>
+                            <h2>What's your name?</h2>
+                            <p>This is how we'll greet you across your dashboard and platform</p>
+                        </div>
+
+                        <div class="fgroup">
+                            <label for="step1-name">Full Name</label>
+                            <div class="finput-wrap">
+                                <i class="fa-regular fa-user finput-icon"></i>
+                                <input type="text" id="step1-name" class="finput" placeholder="e.g. Ananya Sharma" autocomplete="name" autofocus>
+                            </div>
+                            <!-- Name Preview Badge -->
+                            <div id="name-preview-badge" class="name-preview-badge">
+                                <div id="name-initials" class="name-initials-circle">A</div>
+                                <div>
+                                    <div id="name-preview-text" class="name-preview-text">Hi, Ananya! 👋</div>
+                                    <div class="name-preview-sub">Welcome to CareerInfinity AI</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="step1-next" class="btn-primary" disabled>
+                            Continue to Resume Upload <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <div class="divider"><span>or use SSO Single Sign-On</span></div>
+                        <div class="sso-grid">
+                            <button type="button" class="btn-sso btn-sso-google" data-provider="Google" title="Google SSO">
+                                <i class="fa-brands fa-google" style="color:#ea4335;font-size:1.15rem;"></i>
+                                <span>Google</span>
+                            </button>
+                            <button type="button" class="btn-sso btn-sso-linkedin" data-provider="LinkedIn" title="LinkedIn SSO">
+                                <i class="fa-brands fa-linkedin" style="color:#0a66c2;font-size:1.15rem;"></i>
+                                <span>LinkedIn</span>
+                            </button>
+                            <button type="button" class="btn-sso btn-sso-microsoft" data-provider="Microsoft" title="Microsoft SSO">
+                                <i class="fa-brands fa-microsoft" style="color:#00a4ef;font-size:1.15rem;"></i>
+                                <span>Microsoft</span>
+                            </button>
+                        </div>
+
+                        <div class="card-foot-text">
+                            Already have an account? <a href="#" id="link-go-signin" class="link-accent">Sign In Directly</a>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Resume Upload -->
+                    <div class="step-panel" id="step-2">
+                        <div class="step-header">
+                            <div class="step-avatar-ring">📄</div>
+                            <h2>Upload Your Resume</h2>
+                            <p>Our AI will analyze your skills, certs & projects to personalize your scores</p>
+                        </div>
+
+                        <!-- Dropzone -->
+                        <div id="resume-dropzone" class="resume-dropzone">
+                            <input type="file" id="resume-file-input" accept=".pdf,.doc,.docx,.txt">
+                            <span class="dropzone-icon">📁</span>
+                            <div class="dropzone-title">Drag & Drop your Resume</div>
+                            <div class="dropzone-sub">or click to browse from your computer</div>
+                            <div class="dropzone-formats">
+                                <span class="format-pill">PDF</span>
+                                <span class="format-pill">DOCX</span>
+                                <span class="format-pill">TXT</span>
+                            </div>
+                        </div>
+
+                        <!-- Success state after file picked -->
+                        <div id="resume-success-state" class="resume-success-state">
+                            <div class="resume-thumb">✅</div>
+                            <div class="resume-success-info">
+                                <div id="resume-file-name" class="resume-file-name">my_resume.pdf</div>
+                                <div class="resume-parsing-status">AI Keyword Extraction Active...</div>
+                            </div>
+                            <button id="resume-clear-btn" class="resume-clear-btn" title="Remove file">✕</button>
+                        </div>
+
+                        <!-- Parsing Progress Steps Animation -->
+                        <div id="parsing-progress-wrap" class="parsing-progress-wrap">
+                            <div class="parsing-steps">
+                                <div class="parsing-step" id="ps-1"><div class="step-dot">1</div><span>Extracting text content from file...</span></div>
+                                <div class="parsing-step" id="ps-2"><div class="step-dot">2</div><span>Detecting programming skills & tech stack...</span></div>
+                                <div class="parsing-step" id="ps-3"><div class="step-dot">3</div><span>Counting certifications & project experience...</span></div>
+                                <div class="parsing-step" id="ps-4"><div class="step-dot">4</div><span>Calculating your Career Match Score...</span></div>
+                                <div class="parsing-step" id="ps-5"><div class="step-dot">5</div><span>Generating personalized AI career recommendations...</span></div>
+                            </div>
+                        </div>
+
+                        <button id="step2-next" class="btn-primary" disabled style="margin-top:1.25rem;">
+                            <i class="fa-solid fa-gauge-high"></i> Go to My Dashboard
+                        </button>
+                        <button id="step2-skip" class="btn-secondary" style="margin-top:0.6rem;">
+                            Skip for now — I'll upload later
+                        </button>
+                    </div>
+
+                    <!-- STEP 3: Sign In (For returning users who clicked Sign In or Step 3) -->
+                    <div class="step-panel" id="step-3">
+                        <div class="step-header">
+                            <div class="step-avatar-ring">🔐</div>
+                            <h2>Welcome Back!</h2>
+                            <p>Sign in to continue tracking your AI placement journey</p>
+                        </div>
+
+                        <form id="standard-login-form">
+                            <div class="fgroup">
+                                <label for="login-email">Email or Username</label>
+                                <div class="finput-wrap">
+                                    <i class="fa-regular fa-envelope finput-icon"></i>
+                                    <input type="text" id="login-email" class="finput" placeholder="e.g. ananya.sharma@infosys.edu">
+                                </div>
+                            </div>
+                            <div class="fgroup">
+                                <label for="login-password">Password</label>
+                                <div class="finput-wrap">
+                                    <i class="fa-solid fa-lock finput-icon"></i>
+                                    <input type="password" id="login-password" class="finput" placeholder="Enter your password" value="••••••••">
+                                    <button type="button" id="eye-toggle-btn" class="eye-toggle"><i class="fa-regular fa-eye-slash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-row-split">
+                                <label class="check-label"><input type="checkbox" checked> Remember me</label>
+                                <a href="#" class="link-accent">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                Sign In to Dashboard <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+
+                        <div class="divider"><span>or continue with SSO</span></div>
+                        <div class="sso-grid">
+                            <button type="button" class="btn-sso btn-sso-google" data-provider="Google">
+                                <i class="fa-brands fa-google" style="color:#ea4335;font-size:1.15rem;"></i>
+                                <span>Google</span>
+                            </button>
+                            <button type="button" class="btn-sso btn-sso-linkedin" data-provider="LinkedIn">
+                                <i class="fa-brands fa-linkedin" style="color:#0a66c2;font-size:1.15rem;"></i>
+                                <span>LinkedIn</span>
+                            </button>
+                            <button type="button" class="btn-sso btn-sso-microsoft" data-provider="Microsoft">
+                                <i class="fa-brands fa-microsoft" style="color:#00a4ef;font-size:1.15rem;"></i>
+                                <span>Microsoft</span>
+                            </button>
+                        </div>
+                        <div class="card-foot-text">
+                            New here? <a href="#" id="link-go-name" class="link-accent">Start at Step 1</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end #login-steps-wrap -->
+
+            </div>
+        </div>
+
+    </div>
+    <!-- end .landing-content -->
+
+    <!-- ===== INFO SECTIONS ===== -->
+    <div class="info-sections" id="whoisit">
+        <div class="info-container">
+            <h2 class="sec-heading">Built For Ambitious Tech Talent</h2>
+            <p class="sec-sub">Whether you are starting from zero or ready for campus placements, CareerInfinity AI tailors everything to your actual profile.</p>
+
+            <div class="who-grid">
+                <div class="who-card">
+                    <div class="who-badge">🎓 Students & Interns</div>
+                    <h3>Discover Where You Stand</h3>
+                    <p>Upload your academic resume. Our AI maps your coursework to 15+ high-paying roles like Full Stack Engineer, Data Scientist, and Cloud DevOps.</p>
+                </div>
+                <div class="who-card">
+                    <div class="who-badge">🚀 Placement Seekers</div>
+                    <h3>Crack Top Drive Shortlists</h3>
+                    <p>Check ATS readiness, get keyword optimization suggestions, and apply directly to verified hiring drives from TCS, Infosys, and Wipro.</p>
+                </div>
+                <div class="who-card">
+                    <div class="who-badge">📈 Career Switchers</div>
+                    <h3>Close Critical Skill Gaps</h3>
+                    <p>Identify missing certifications, track learning KPIs, and monitor your mock interview readiness over time with real-time feedback.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="landing-footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="nav-logo">
+                    <div class="nav-logo-icon">🧠</div>
+                    <div class="nav-logo-text">Career <span>Infinity</span></div>
+                </div>
+                <p>Advanced AI Career Intelligence & Placement Portal built exclusively for the Infosys Springboard Internship Program 2026.</p>
+            </div>
+            <div class="footer-links-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#features">AI Resume Scanner</a></li>
+                    <li><a href="#features">Match Score Engine</a></li>
+                    <li><a href="#features">Single Sign-On (SSO)</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="dashboard.html">Intern Dashboard</a></li>
+                    <li><a href="careers.html">Career Intelligence</a></li>
+                    <li><a href="ideas.html">Innovation Showcase</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 CareerInfinity for Infosys Springboard Internship. All rights reserved.</span>
+            <span>Built with ❤️ for next-gen engineering talent.</span>
+        </div>
+    </footer>
+
+</div>
+
+<!-- ============================================================================
+     INTERACTIVE SSO SINGLE SIGN-ON GATEWAY MODAL
+     ============================================================================ -->
+<div id="sso-overlay" class="modal-overlay">
+    <div class="modal-box">
+        <button id="sso-modal-close" class="modal-close" title="Close"><i class="fa-solid fa-xmark"></i></button>
+        
+        <div class="modal-head">
+            <span class="modal-emoji">🔐</span>
+            <h3 id="sso-modal-title">Select Your SSO Account</h3>
+            <p id="sso-modal-sub">Authenticate securely without passwords. Select an account or enter your custom username.</p>
+        </div>
+
+        <div class="sso-body">
+            <!-- PANEL 1: ACCOUNT SELECTION -->
+            <div class="sso-panel active" id="sso-panel-accounts">
+                <div class="account-list">
+                    <div class="acct-item" data-name="Ananya Sharma" data-email="ananya.sharma@infosys.edu">
+                        <div class="acct-left">
+                            <div class="acct-av av-purple">A</div>
+                            <div>
+                                <div class="acct-name">Ananya Sharma <span style="font-size:0.7rem;background:rgba(16,185,129,0.15);color:#10b981;padding:2px 6px;border-radius:4px;margin-left:4px;">Recommended</span></div>
+                                <div class="acct-email">ananya.sharma@infosys.edu • B.Sc. IT Student</div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right acct-arrow"></i>
+                    </div>
+
+                    <div class="acct-item" data-name="Rahul Verma" data-email="rahul.verma@infosys.edu">
+                        <div class="acct-left">
+                            <div class="acct-av av-blue">R</div>
+                            <div>
+                                <div class="acct-name">Rahul Verma</div>
+                                <div class="acct-email">rahul.verma@infosys.edu • B.Tech CS Intern</div>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right acct-arrow"></i>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.25rem;">
+                    <label for="custom-sso-name" style="display:block;font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;">Or sign in with your own custom name:</label>
+                    <form id="custom-sso-form" style="display:flex;gap:8px;">
+                        <input type="text" id="custom-sso-name" class="finput" placeholder="Enter full name (e.g. Priya Nair)" required style="flex:1;">
+                        <button type="submit" class="btn-primary" style="width:auto;padding:0.75rem 1.25rem;">Login</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PANEL 2: OPTIONAL RESUME UPLOAD IN SSO -->
+            <div class="sso-panel" id="sso-panel-resume">
+                <div style="text-align:center;margin-bottom:1.25rem;">
+                    <div style="font-size:2rem;margin-bottom:0.5rem;">📄</div>
+                    <h4 style="font-size:1.1rem;color:var(--text-primary);margin-bottom:4px;">Enhance Your Dashboard with AI Analytics</h4>
+                    <p style="font-size:0.82rem;color:var(--text-secondary);">Upload your resume now so CareerInfinity can instantly calculate your match scores upon login!</p>
+                </div>
+
+                <div id="sso-resume-dropzone" class="resume-dropzone">
+                    <input type="file" id="sso-resume-input" accept=".pdf,.doc,.docx,.txt">
+                    <span class="dropzone-icon">📁</span>
+                    <div class="dropzone-title">Drag & Drop Resume</div>
+                    <div class="dropzone-sub">or click to browse files</div>
+                </div>
+
+                <div id="sso-upload-success" class="resume-success-state">
+                    <span class="resume-thumb">✅</span>
+                    <div class="resume-success-info">
+                        <div id="sso-file-name" class="resume-file-name">resume.pdf</div>
+                        <div class="resume-parsing-status">AI Extraction Complete!</div>
+                    </div>
+                    <button id="sso-clear-btn" class="resume-clear-btn">✕</button>
+                </div>
+
+                <div id="sso-parse-steps" class="parsing-progress-wrap">
+                    <div class="parsing-steps">
+                        <div class="parsing-step parse-step"><div class="step-dot">✓</div><span>Extracting text content...</span></div>
+                        <div class="parsing-step parse-step"><div class="step-dot">✓</div><span>Detecting skills & keywords...</span></div>
+                        <div class="parsing-step parse-step"><div class="step-dot">✓</div><span>Computing match score...</span></div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:1.25rem;">
+                    <button id="sso-continue-btn" class="btn-primary" disabled><i class="fa-solid fa-gauge-high"></i> Continue to Dashboard</button>
+                    <button id="sso-skip-btn" class="btn-secondary">Skip for now — Go directly to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

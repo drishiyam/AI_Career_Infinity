@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerInfinity — AI Career Intelligence Dashboard</title>
+    <meta name="description" content="Your AI-powered resume-driven career dashboard for Infosys Springboard internship.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Apply theme before render
+        (function() {
+            const t = localStorage.getItem('ci_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+        window.addEventListener('load', () => {
+            if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        });
+    </script>
+</head>
+<body id="dashboard-root">
+
+<div class="dash-wrap">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+        <div>
+            <div class="sb-brand">
+                <div class="sb-logo">🧠</div>
+                <div class="sb-brand-text">
+                    <h2>CareerInfinity</h2>
+                    <small>AI POWERED</small>
+                </div>
+            </div>
+
+            <div class="sb-section">Main Menu</div>
+            <nav class="sb-nav">
+                <a href="dashboard.html" class="sb-link active"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+                <a href="careers.html" class="sb-link"><i class="fa-solid fa-microchip"></i><span>Career Intelligence</span></a>
+                <a href="skills.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Skill Analysis</span></a>
+                <a href="learning.html" class="sb-link"><i class="fa-solid fa-graduation-cap"></i><span>Learning Path</span></a>
+                <a href="resume.html" class="sb-link"><i class="fa-regular fa-file-lines"></i><span>Resume Analyzer</span></a>
+                <a href="mockinterview.html" class="sb-link"><i class="fa-solid fa-clipboard-question"></i><span>Mock Interview</span></a>
+                <a href="jobs.html" class="sb-link"><i class="fa-solid fa-briefcase"></i><span>Job Recommendations</span></a>
+                <a href="placements.html" class="sb-link"><i class="fa-solid fa-building-circle-check"></i><span>Placement Drives</span></a>
+            </nav>
+
+            <div class="sb-section" style="margin-top:0.5rem;">Tools</div>
+            <nav class="sb-nav">
+                <a href="assessments.html" class="sb-link"><i class="fa-solid fa-check-to-slot"></i><span>Assessments</span></a>
+                <a href="certificates.html" class="sb-link"><i class="fa-solid fa-certificate"></i><span>Certificates</span></a>
+                <a href="ideas.html" class="sb-link"><i class="fa-solid fa-lightbulb"></i><span>Ideas Lab</span></a>
+            </nav>
+        </div>
+
+        <div>
+            <nav class="sb-nav" style="margin-bottom:0.75rem;">
+                <a href="#" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+                <a href="#" class="sb-link"><i class="fa-regular fa-circle-question"></i><span>Help & Support</span></a>
+            </nav>
+            <div class="sb-promo">
+                <h4>Upgrade to Premium ✦</h4>
+                <p>Advanced AI insights, priority interview prep, and dedicated placement support.</p>
+                <button class="btn-promo" onclick="showToast('⚡ Premium AI unlocked for Springboard project!','success');">Upgrade Now</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN AREA ===== -->
+    <main class="main-area">
+
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <div class="searchbar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search careers, skills, jobs..." autocomplete="off">
+            </div>
+
+            <div class="bar-right">
+                <!-- THEME TOGGLE — working on dashboard too -->
+                <button class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="toggle-icon">☀️</span>
+                    <span class="toggle-label">Light Mode</span>
+                </button>
+
+                <button class="notif-btn" title="Notifications" onclick="showToast('🔔 3 new placement drive notifications!','info')">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge"></span>
+                </button>
+
+                <div class="profile-pill" id="profile-pill">
+                    <div class="pill-av" data-user-initial>A</div>
+                    <div>
+                        <div class="pill-name">Hi, <span data-user-firstname>Ananya</span></div>
+                        <div class="pill-role" data-user-role>Springboard Intern</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;color:var(--text-muted);margin-left:6px;"></i>
+
+                    <!-- Dropdown -->
+                    <div class="pill-dropdown" id="pill-dropdown">
+                        <div class="dd-top">
+                            <div class="dd-name-txt" data-user-name>Ananya Sharma</div>
+                            <div class="dd-email-txt" data-user-email>ananya@infosys.edu</div>
+                        </div>
+                        <a href="#" class="dd-item"><i class="fa-regular fa-user"></i> My Profile</a>
+                        <a href="index.html" class="dd-item"><i class="fa-solid fa-rotate-left"></i> Switch SSO Account</a>
+                        <a href="ideas.html" class="dd-item"><i class="fa-solid fa-lightbulb"></i> Ideas Lab</a>
+                        <a href="#" class="dd-item red" id="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Welcome -->
+        <div class="welcome-sec">
+            <h1 id="welcome-heading">Welcome back, <span style="color:var(--accent-cyan);" data-user-firstname>User</span>! 👋</h1>
+            <p>Track your progress and achieve your dream career with AI-powered insights</p>
+        </div>
+
+        <!-- Resume Alert -->
+        <div id="resume-alert-bar" class="resume-alert gone">
+            <div class="ral-left">
+                <i class="fa-solid fa-file-arrow-up"></i>
+                <div>
+                    <div class="ral-title">Upload Your Resume to Unlock Full Analytics</div>
+                    <div class="ral-sub">Get personalized career match score, skill analysis, and KPI tracking from your actual resume</div>
+                </div>
+            </div>
+            <button class="btn-upload-res" onclick="window.openDashResume?.()">
+                <i class="fa-solid fa-upload"></i> Upload Resume
+            </button>
+        </div>
+        <input type="file" id="dash-resume-input" accept=".pdf,.doc,.docx,.txt" style="display:none;">
+
+        <!-- ===== SECTION 1: MATCH SCORE + ATS ===== -->
+        <div class="match-grid">
+
+            <!-- Career Match Score Card -->
+            <div class="dash-card">
+                <div class="match-top">
+                    <h3><i class="fa-solid fa-bullseye" style="color:var(--accent-cyan);margin-right:8px;"></i> Career Match Score</h3>
+                    <span id="match-chip" class="match-chip chip-gray">📄 Upload Resume</span>
+                </div>
+                <div class="match-body">
+                    <div>
+                        <div class="score-big" id="match-score-num">0%</div>
+                        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">vs target role requirements</div>
+                    </div>
+                    <div class="radial-wrap">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="r-bg" cx="60" cy="60" r="54"></circle>
+                            <circle id="radial-fill" class="r-fill" cx="60" cy="60" r="54" stroke="#10b981"></circle>
+                        </svg>
+                        <div class="r-center">Match</div>
+                    </div>
+                </div>
+                <p id="match-comment" class="match-comment">📁 Upload your resume to get an AI-powered career match score tailored to your specific skills and background!</p>
+                <div id="role-tags" class="role-tags"></div>
+                <a href="careers.html" class="btn-view-roadmap"><i class="fa-solid fa-arrow-right"></i> View Career Roadmap</a>
+            </div>
+
+            <!-- ATS Resume Score Card -->
+            <div class="dash-card">
+                <div class="card-hdr">
+                    <div>
+                        <h3><i class="fa-regular fa-file-lines" style="color:var(--accent-cyan);margin-right:8px;"></i> Resume ATS Score</h3>
+                        <p>Applicant Tracking System analysis</p>
+                    </div>
+                    <button class="link-all" onclick="window.openDashResume?.()">Upload / Refresh</button>
+                </div>
+
+                <!-- Mini upload box (shown if no resume) -->
+                <div class="resume-mini-upload-box" id="mini-upload-box">
+                    <input type="file" onchange="handleMiniUpload(event)" accept=".pdf,.doc,.docx,.txt">
+                    <div style="font-size:2.2rem;margin-bottom:6px;">📂</div>
+                    <h4>Drop your Resume Here</h4>
+                    <p>AI will extract all skills, certs & projects automatically</p>
+                    <div class="format-chips" style="margin-top:8px;">
+                        <span class="fmt-chip">PDF</span>
+                        <span class="fmt-chip">DOCX</span>
+                        <span class="fmt-chip">TXT</span>
+                    </div>
+                </div>
+
+                <!-- ATS bars (shown after resume upload) -->
+                <div class="ats-list" id="ats-scores-section" style="display:none;flex-direction:column;gap:1rem;">
+                    <div class="ats-row">
+                        <div class="ats-top"><span>ATS Compatibility</span><span id="ats-num">0%</span></div>
+                        <div class="prog-track"><div class="prog-fill" id="ats-bar" style="width:0%;"></div></div>
+                    </div>
+                    <div class="ats-row">
+                        <div class="ats-top"><span>Grammar & Clarity</span><span id="grammar-num">0%</span></div>
+                        <div class="prog-track"><div class="prog-fill" id="grammar-bar" style="width:0%;"></div></div>
+                    </div>
+                    <div class="ats-row">
+                        <div class="ats-top"><span>Keyword Density</span><span id="keyword-num">0%</span></div>
+                        <div class="prog-track"><div class="prog-fill" id="keyword-bar" style="width:0%;"></div></div>
+                    </div>
+                    <div class="ats-row">
+                        <div class="ats-top"><span>Formatting Score</span><span id="format-num">0%</span></div>
+                        <div class="prog-track"><div class="prog-fill" id="format-bar" style="width:0%;"></div></div>
+                    </div>
+                    <div class="ai-tip-box">
+                        <div class="ai-tip-label">💡 AI Optimization Tip</div>
+                        <div class="ai-tip-text" id="ai-tip-text">Upload your resume to get AI-powered ATS optimization suggestions.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== SECTION 2: KPI CARDS ===== -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div>
+                    <div class="kpi-label">Skills Learned</div>
+                    <div class="kpi-num" id="kpi-skills">0</div>
+                    <div class="kpi-sub">detected from resume</div>
+                    <div class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> From resume analysis</div>
+                </div>
+                <div class="kpi-icon ic-g"><i class="fa-solid fa-chart-line" style="color:#10b981;font-size:1.3rem;"></i></div>
+            </div>
+            <div class="kpi-card">
+                <div>
+                    <div class="kpi-label">Certifications</div>
+                    <div class="kpi-num" id="kpi-certs">0</div>
+                    <div class="kpi-sub" id="kpi-certs-month">+0 this month</div>
+                    <div class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> Upload resume</div>
+                </div>
+                <div class="kpi-icon ic-p"><i class="fa-solid fa-award" style="color:#6c5ce7;font-size:1.3rem;"></i></div>
+            </div>
+            <div class="kpi-card">
+                <div>
+                    <div class="kpi-label">Mock Interviews</div>
+                    <div class="kpi-num" id="kpi-mock">0</div>
+                    <div class="kpi-sub">AI readiness estimate</div>
+                    <div class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> Based on resume depth</div>
+                </div>
+                <div class="kpi-icon ic-b"><i class="fa-solid fa-clipboard-check" style="color:#3b82f6;font-size:1.3rem;"></i></div>
+            </div>
+            <div class="kpi-card">
+                <div>
+                    <div class="kpi-label">Profile Strength</div>
+                    <div class="kpi-num" id="kpi-profile">0%</div>
+                    <div class="kpi-sub" id="kpi-profile-label">Upload to calculate</div>
+                    <div class="kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> Resume completeness</div>
+                </div>
+                <div class="kpi-icon ic-a"><i class="fa-regular fa-user" style="color:#f59e0b;font-size:1.3rem;"></i></div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 3: CAREER PATHS + SKILLS ===== -->
+        <div class="mid-grid">
+            <div class="dash-card">
+                <div class="card-hdr">
+                    <div>
+                        <h3>Recommended Career Paths</h3>
+                        <p>Based on skills extracted from your resume</p>
+                    </div>
+                    <a href="careers.html" class="link-all">View All</a>
+                </div>
+                <div class="cp-list" id="career-paths-list">
+                    <div style="text-align:center;padding:2rem;color:var(--text-muted);font-size:0.85rem;">📁 Upload your resume to see personalized career path recommendations</div>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="card-hdr">
+                    <div>
+                        <h3>Skill Proficiency</h3>
+                        <p>Extracted from your resume analysis</p>
+                    </div>
+                    <a href="careers.html" class="link-all">Full Analysis</a>
+                </div>
+                <div class="skills-list" id="skills-list">
+                    <div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.82rem;">📁 Upload resume to see your skill proficiency levels</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 4: PLACEMENT DRIVES + RESUME SCORE ===== -->
+        <div class="bot-grid">
+            <div class="dash-card">
+                <div class="card-hdr">
+                    <div>
+                        <h3>Upcoming Placement Drives</h3>
+                        <p>Exclusive opportunities for Springboard interns</p>
+                    </div>
+                    <a href="careers.html" class="link-all">View All</a>
+                </div>
+                <div class="drives-list">
+                    <div class="drive-row">
+                        <div class="drive-co">
+                            <div class="co-badge co-tcs">TCS</div>
+                            <div><div class="co-name-txt">TCS Digital</div><div class="co-role-txt">Software Developer</div></div>
+                        </div>
+                        <div class="drive-meta"><span><i class="fa-regular fa-calendar"></i> 30 May 2026</span><span><i class="fa-solid fa-location-dot"></i> Bangalore</span></div>
+                        <button class="btn-apply" onclick="showToast('⚡ Applied to TCS Digital! Check email for confirmation.','success')">Apply Now</button>
+                    </div>
+                    <div class="drive-row">
+                        <div class="drive-co">
+                            <div class="co-badge co-infy">INFY</div>
+                            <div><div class="co-name-txt">Infosys</div><div class="co-role-txt">System Engineer</div></div>
+                        </div>
+                        <div class="drive-meta"><span><i class="fa-regular fa-calendar"></i> 05 Jun 2026</span><span><i class="fa-solid fa-location-dot"></i> Hybrid</span></div>
+                        <button class="btn-apply" onclick="showToast('⚡ Applied to Infosys SE Track!','success')">Apply Now</button>
+                    </div>
+                    <div class="drive-row">
+                        <div class="drive-co">
+                            <div class="co-badge co-wipro">WIP</div>
+                            <div><div class="co-name-txt">Wipro</div><div class="co-role-txt">Project Engineer</div></div>
+                        </div>
+                        <div class="drive-meta"><span><i class="fa-regular fa-calendar"></i> 12 Jun 2026</span><span><i class="fa-solid fa-location-dot"></i> Chennai</span></div>
+                        <button class="btn-apply" onclick="showToast('⚡ Applied to Wipro PE!','success')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <h3 style="color:var(--text-primary);margin-bottom:4px;">Resume Score</h3>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:1rem;">Overall ATS Optimization Quality</p>
+                <div class="rs-display">
+                    <div class="rs-label" id="rs-label">Pending Upload</div>
+                    <div style="position:relative;width:100px;height:100px;">
+                        <svg viewBox="0 0 100 100" style="transform:rotate(-90deg);width:100px;height:100px;">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--progress-track)" stroke-width="10"></circle>
+                            <circle id="rs-ring" cx="50" cy="50" r="40" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" style="transition:stroke-dashoffset 1.5s ease;"></circle>
+                        </svg>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                            <div class="rs-num" id="rs-num">—</div>
+                        </div>
+                    </div>
+                    <div class="rs-sub">/100 ATS Score</div>
+                </div>
+                <p style="font-size:0.76rem;color:var(--text-secondary);text-align:center;line-height:1.4;margin-bottom:1rem;">Upload a detailed resume with skills, certs & projects to maximize your shortlist probability.</p>
+                <button class="btn-reanalyze" onclick="window.openDashResume?.()">
+                    <i class="fa-solid fa-rotate"></i> Analyze / Re-upload Resume
+                </button>
+            </div>
+        </div>
+
+        <!-- Continue Learning Banner -->
+        <div class="learn-bar">
+            <div class="learn-l">
+                <div class="learn-ico"><i class="fa-solid fa-circle-play"></i></div>
+                <div>
+                    <div class="learn-label">Continue Learning</div>
+                    <div class="learn-sub">Pick up right where you left off</div>
+                </div>
+            </div>
+            <div class="learn-r">
+                <div class="course-thumb"><i class="fa-brands fa-python"></i></div>
+                <div>
+                    <div class="course-name">Python for Data Science</div>
+                    <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+                        <div class="prog-track" style="width:110px;"><div class="prog-fill" style="width:80%;background:var(--grad-primary);height:7px;border-radius:4px;"></div></div>
+                        <span style="font-size:0.75rem;color:var(--text-secondary);font-weight:700;">80%</span>
+                    </div>
+                </div>
+                <button class="btn-continue" onclick="showToast('⚡ Resuming Python for Data Science: Module 4 — Pandas...','success')">Continue</button>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+async function handleMiniUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    showToast('🔍 Analyzing your resume with AI...', 'info');
+    const raw = await ResumeParser.extractFromFile(file);
+    const user = AuthManager.getUser();
+    const parsed = ResumeParser.parse(raw || demoResumeText(user.name));
+    AuthManager.saveResume(parsed);
+    showToast('✅ Resume analyzed! Refreshing dashboard...', 'success');
+    setTimeout(() => window.location.reload(), 1200);
+}
+</script>
+
+</body>
+</html>

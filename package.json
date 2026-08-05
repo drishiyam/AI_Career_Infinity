@@ -1,0 +1,25 @@
+{
+  "name": "career-infinity-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered Career Intelligence Platform for Infosys Springboard Internship",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "infosys",
+    "springboard",
+    "ai",
+    "career",
+    "dashboard",
+    "sso",
+    "chatbot"
+  ],
+  "author": "Infosys Springboard Intern",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

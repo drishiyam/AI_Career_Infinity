@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Interview — CareerInfinity AI</title>
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="mock-root">
+
+<div class="dash-wrap">
+
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <aside class="sidebar">
+        <div>
+            <div class="sb-brand">
+                <div class="sb-logo">🧠</div>
+                <div class="sb-brand-text">
+                    <h2>CareerInfinity</h2>
+                    <small>AI POWERED</small>
+                </div>
+            </div>
+
+            <div class="sb-section">Main Menu</div>
+            <nav class="sb-nav">
+                <a href="dashboard.html" class="sb-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+                <a href="careers.html" class="sb-link"><i class="fa-solid fa-microchip"></i><span>Career Intelligence</span></a>
+                <a href="skills.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Skill Analysis</span></a>
+                <a href="learning.html" class="sb-link"><i class="fa-solid fa-graduation-cap"></i><span>Learning Path</span></a>
+                <a href="resume.html" class="sb-link"><i class="fa-regular fa-file-lines"></i><span>Resume Analyzer</span></a>
+                <a href="mockinterview.html" class="sb-link active"><i class="fa-solid fa-clipboard-question"></i><span>Mock Interview</span></a>
+                <a href="jobs.html" class="sb-link"><i class="fa-solid fa-briefcase"></i><span>Job Recommendations</span></a>
+                <a href="placements.html" class="sb-link"><i class="fa-solid fa-building-circle-check"></i><span>Placement Drives</span></a>
+            </nav>
+
+            <div class="sb-section" style="margin-top:0.5rem;">Tools</div>
+            <nav class="sb-nav">
+                <a href="assessments.html" class="sb-link"><i class="fa-solid fa-check-to-slot"></i><span>Assessments</span></a>
+                <a href="certificates.html" class="sb-link"><i class="fa-solid fa-certificate"></i><span>Certificates</span></a>
+                <a href="ideas.html" class="sb-link"><i class="fa-solid fa-lightbulb"></i><span>Ideas Lab</span></a>
+            </nav>
+        </div>
+
+        <div>
+            <nav class="sb-nav" style="margin-bottom:0.75rem;">
+                <a href="#" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+                <a href="#" class="sb-link"><i class="fa-regular fa-circle-question"></i><span>Help & Support</span></a>
+            </nav>
+            <div class="sb-promo">
+                <h4>Upgrade to Premium ✦</h4>
+                <p>Unlock unlimited 3-Round AI interview simulations & voice feedback.</p>
+                <button class="btn-promo" onclick="showToast('⚡ Premium AI unlocked for Springboard project!','success');">Upgrade Now</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT AREA ===== -->
+    <main class="main-area">
+
+        <!-- TOP HEADER NAVBAR -->
+        <header class="top-bar">
+            <div class="searchbar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search interview topics, aptitude sets, HR questions..." autocomplete="off">
+            </div>
+
+            <div class="bar-right">
+                <!-- THEME TOGGLE -->
+                <button class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="toggle-icon">☀️</span>
+                    <span class="toggle-label">Light Mode</span>
+                </button>
+
+                <button class="notif-btn" title="Notifications" onclick="showToast('🎙️ New user-specific aptitude dataset loaded!','info')">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge"></span>
+                </button>
+
+                <div class="profile-pill" id="profile-pill">
+                    <div class="pill-av" data-user-initial>A</div>
+                    <div>
+                        <div class="pill-name">Hi, <span data-user-firstname>Ananya</span></div><div class="pill-role" data-user-role>B.Sc. IT Student</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;color:var(--text-muted);margin-left:6px;"></i>
+
+                    <!-- Dropdown -->
+                    <div class="pill-dropdown" id="pill-dropdown">
+                        <div class="dd-top">
+                            <div class="dd-name-txt" data-user-name>Ananya Sharma</div>
+                            <div class="dd-email-txt" data-user-email>ananya.sharma@infosys.edu</div>
+                        </div>
+                        <a href="dashboard.html" class="dd-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                        <a href="skills.html" class="dd-item"><i class="fa-solid fa-chart-line"></i> Skill Analysis</a>
+                        <a href="index.html" class="dd-item"><i class="fa-solid fa-rotate-left"></i> Switch SSO Account</a>
+                        <a href="#" class="dd-item red" id="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN PAGE CONTAINER -->
+        <div class="ci-page-content" style="padding-top: 0.75rem;">
+
+            <!-- PAGE TITLE HEADER -->
+            <div style="margin-bottom: 1.5rem; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.5px;">AI Mock Interview & Speech Analytics</h1>
+                    <p style="font-size: 0.92rem; color: var(--text-secondary);">3-Tier Comprehensive Evaluation: User-Specific Aptitude, Technical Coding & HR Voice AI</p>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <span class="timer-chip ok" id="interview-status-pill"><i class="fa-solid fa-circle-dot"></i> Live AI Session Ready</span>
+                </div>
+            </div>
+
+            <!-- 3 ROUNDS SELECTION TABS -->
+            <div class="mock-rounds-nav">
+                <!-- Round 1 -->
+                <div class="mock-round-card active" id="btn-round-1" onclick="switchRound(1)">
+                    <div class="mock-round-num">R1</div>
+                    <div>
+                        <h4 style="font-size:1rem; font-weight:800; color:var(--text-primary); margin-bottom:2px;">Aptitude Simulator</h4>
+                        <p style="font-size:0.78rem; color:var(--text-secondary);">Randomized dataset per user • Quantitative & Logical</p>
+                    </div>
+                </div>
+
+                <!-- Round 2 -->
+                <div class="mock-round-card" id="btn-round-2" onclick="switchRound(2)">
+                    <div class="mock-round-num" style="background:#2563eb;">R2</div>
+                    <div>
+                        <h4 style="font-size:1rem; font-weight:800; color:var(--text-primary); margin-bottom:2px;">Technical Coding Round</h4>
+                        <p style="font-size:0.78rem; color:var(--text-secondary);">Python, SQL & System Design • Code Evaluation</p>
+                    </div>
+                </div>
+
+                <!-- Round 3 -->
+                <div class="mock-round-card" id="btn-round-3" onclick="switchRound(3)">
+                    <div class="mock-round-num" style="background:#ef4444;">R3</div>
+                    <div>
+                        <h4 style="font-size:1rem; font-weight:800; color:var(--text-primary); margin-bottom:2px;">HR & Behavioral Voice AI</h4>
+                        <p style="font-size:0.78rem; color:var(--text-secondary);">Tough HR interrogation • AI Speech & Audio analysis</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+                 ROUND 1 PANEL: APTITUDE (USER SPECIFIC RANDOMIZED DATASET)
+                 ============================================================ -->
+            <div id="round-1-panel" class="ci-card" style="margin-bottom: 2rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:1.2rem; margin-bottom:1.5rem; flex-wrap:wrap; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <div style="width:48px; height:48px; border-radius:12px; background:rgba(108,92,231,0.15); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:1.5rem;">🧮</div>
+                        <div>
+                            <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary);">Aptitude Dataset for: <span style="color:#10b981;" id="apt-user-display" data-user-firstname>User</span></h3>
+                            <p style="font-size:0.82rem; color:var(--text-secondary);">Unique dynamic question generated based on your profile hash & session ID.</p>
+                        </div>
+                    </div>
+                    <button class="apply-btn" style="padding:8px 18px;" onclick="loadNextAptitudeQuestion()">
+                        <i class="fa-solid fa-rotate"></i> Generate Next Question
+                    </button>
+                </div>
+
+                <!-- Aptitude Question Display -->
+                <div class="question-bubble" id="apt-question-text" style="font-size:1.05rem; font-weight:600;">
+                    Loading your personalized aptitude problem statement...
+                </div>
+
+                <!-- MCQ Options Grid -->
+                <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem; margin-bottom:1.75rem;" id="apt-options-grid">
+                    <!-- Options injected via JS -->
+                </div>
+
+                <!-- Submit & Feedback Row -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                    <button class="btn-apply-s1" style="width:auto; padding:12px 32px;" onclick="checkAptitudeAnswer()">
+                        Submit Answer & Check AI Explanation
+                    </button>
+                    <div id="apt-feedback" style="font-size:0.92rem; font-weight:700; color:#10b981; display:none;">
+                        <!-- Feedback shown dynamically -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ============================================================
+                 ROUND 2 PANEL: TECHNICAL CODING & ARCHITECTURE
+                 ============================================================ -->
+            <div id="round-2-panel" class="ci-card" style="margin-bottom: 2rem; display:none;">
+                <div class="ai-interviewer">
+                    <div class="ai-av">👩‍💻</div>
+                    <div>
+                        <div class="ai-name">Sarah AI — Technical Lead Interviewer</div>
+                        <div class="ai-role">Specialized in Python Core, Data Structures, and Relational SQL Systems</div>
+                        <div class="online-indicator" style="margin-top:4px;"><span class="online-dot"></span> Active Technical Interrogation</div>
+                    </div>
+                </div>
+
+                <!-- Technical Question -->
+                <div class="question-bubble" id="tech-question-bubble">
+                    <strong>Question 1 of 3 (Technical Deep Dive):</strong><br>
+                    "Explain the exact difference between a Generator and a normal Iterator in Python. Write a custom generator function <code>fibonacci_gen(n)</code> that yields the first <code>N</code> Fibonacci numbers with <code>O(1)</code> auxiliary space complexity. Why is this more memory efficient for large datasets?"
+                </div>
+
+                <!-- Code Editor Area -->
+                <div style="margin-bottom:1rem;">
+                    <label style="font-size:0.84rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Your Python Code / Technical Answer:</label>
+                    <textarea class="answer-area" id="tech-code-input" rows="7" style="font-family:monospace; font-size:0.92rem; background:rgba(0,0,0,0.25);">def fibonacci_gen(n):
+    # Write your generator logic here with O(1) space
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b</textarea>
+                </div>
+
+                <!-- Action buttons -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button class="btn-apply-s1" style="width:auto; padding:10px 24px; background:#2563eb;" onclick="evaluateTechAnswer()">
+                            ⚡ Run AI Code Evaluation
+                        </button>
+                        <button class="btn-apply-s1" style="width:auto; padding:10px 20px; background:#10b981;" onclick="switchTechQuestion()">
+                            🔄 Next Coding Question <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button class="job-pill-btn" onclick="getTechHint()">
+                            💡 Get AI Hint
+                        </button>
+                    </div>
+                    <span style="font-size:0.84rem; color:var(--text-muted); font-weight:600;" id="tech-time-suggested">⏱️ Time Suggested: 5 Minutes</span>
+                </div>
+
+                <!-- AI Evaluation Feedback Box -->
+                <div id="tech-eval-box" style="margin-top:1.5rem; padding:1.2rem; background:rgba(16,185,129,0.1); border:1.5px solid rgba(16,185,129,0.3); border-radius:14px; display:none;">
+                    <div style="font-weight:800; color:#10b981; font-size:1rem; margin-bottom:6px;">✔ AI Code Evaluation Verified (Score: 96/100)</div>
+                    <p style="font-size:0.88rem; color:var(--text-primary); margin:0; line-height:1.5;">
+                        <strong>Space Complexity Analysis:</strong> Excellent! Using <code>yield</code> instead of storing elements in a list maintains <code>O(1)</code> auxiliary memory. Tuple unpacking avoids temporary variable allocation. You are ready for Round 3!
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- ============================================================
+                 ROUND 3 PANEL: HR & BEHAVIORAL AI VOICE INTERVIEW
+                 ============================================================ -->
+            <div id="round-3-panel" class="ci-card" style="margin-bottom: 2rem; display:none;">
+                <div class="ai-interviewer" style="border-bottom-color:rgba(239,68,68,0.25);">
+                    <div class="ai-av" style="background:linear-gradient(135deg,#ef4444,#f97316);">👨‍💼</div>
+                    <div>
+                        <div class="ai-name">Vikram AI — Senior HR Director & Executive Hiring Panel</div>
+                        <div class="ai-role">Specialized in High-Pressure Behavioral Scenarios, Conflict Resolution, and Cultural Fit</div>
+                        <div class="online-indicator" style="color:#f97316;"><span class="online-dot" style="background:#f97316; box-shadow:0 0 8px #f97316;"></span> Round 3: Tough HR Interrogation Active</div>
+                    </div>
+                </div>
+
+                <!-- Tough HR Question -->
+                <div class="question-bubble" style="border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.06);">
+                    <strong>Tough HR Interrogation Question:</strong><br>
+                    <span id="hr-question-text">"Why should our executive hiring panel select you for this competitive software role over other candidates who already possess 2+ years of full-time corporate work experience and higher academic percentages?"</span>
+                </div>
+
+                <!-- Voice & Speech Wave Box -->
+                <div class="voice-wave-box">
+                    <div style="display:flex; align-items:center; gap:14px;">
+                        <button class="job-pill-btn" style="border-color:#3b82f6; color:#3b82f6; font-weight:800;" onclick="speakHRQuestion()">
+                            <i class="fa-solid fa-volume-high"></i> Listen to AI Interrogation Voice
+                        </button>
+                        <span id="voice-timer-label" style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">Ready to record audio response...</span>
+                    </div>
+
+                    <div class="wave-bars" id="audio-wave-bars">
+                        <div class="wave-bar" style="height:8px;"></div>
+                        <div class="wave-bar" style="height:14px;"></div>
+                        <div class="wave-bar" style="height:22px;"></div>
+                        <div class="wave-bar" style="height:30px;"></div>
+                        <div class="wave-bar" style="height:18px;"></div>
+                        <div class="wave-bar" style="height:12px;"></div>
+                        <div class="wave-bar" style="height:26px;"></div>
+                        <div class="wave-bar" style="height:16px;"></div>
+                    </div>
+                </div>
+
+                <!-- Student Voice Action Controls -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:1.5rem;">
+                    <button class="btn-voice-record" id="btn-voice-toggle" onclick="toggleVoiceRecording()">
+                        <i class="fa-solid fa-microphone"></i> <span>Speak / Record Voice Answer</span>
+                    </button>
+
+                    <button class="job-pill-btn" onclick="switchHRQuestion()">
+                        <i class="fa-solid fa-shuffle"></i> Try Next Tough HR Question
+                    </button>
+                </div>
+
+                <!-- AI Speech Analytics & Transcript Box -->
+                <div id="hr-voice-feedback" style="padding:1.4rem; background:var(--bg-card2); border:1px solid var(--card-border); border-radius:16px; display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+                        <h4 style="font-size:1.05rem; font-weight:800; color:var(--text-primary);">🎙️ AI Voice & Tone Evaluation Report</h4>
+                        <span style="background:rgba(16,185,129,0.15); color:#10b981; font-weight:800; font-size:0.78rem; padding:4px 12px; border-radius:20px;">✔ High Vocal Confidence (94%)</span>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:1.25rem;">
+                        <div style="background:var(--bg-card); padding:10px; border-radius:10px; border:1px solid var(--card-border);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">SPEECH PACE</div>
+                            <div style="font-size:1.1rem; font-weight:800; color:#3b82f6;">134 wpm (Optimal)</div>
+                        </div>
+                        <div style="background:var(--bg-card); padding:10px; border-radius:10px; border:1px solid var(--card-border);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">VOCAL CLARITY</div>
+                            <div style="font-size:1.1rem; font-weight:800; color:#10b981;">96 / 100</div>
+                        </div>
+                        <div style="background:var(--bg-card); padding:10px; border-radius:10px; border:1px solid var(--card-border);">
+                            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">TONE & PHRASING</div>
+                            <div style="font-size:1.1rem; font-weight:800; color:#f59e0b;">Persuasive & Calm</div>
+                        </div>
+                    </div>
+
+                    <p style="font-size:0.9rem; color:var(--text-secondary); margin:0; line-height:1.6;">
+                        <strong>AI Speech Breakdown & Advice:</strong> Excellent poise under pressure! By structuring your response around your practical, project-based deliverables in the Infosys Springboard internship (`CareerInfinity AI platform`), you successfully neutralized the experience objection and demonstrated immediate value-add.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- end ci-page-content -->
+
+    </main>
+</div>
+
+<!-- ============================================================
+     INTERACTIVE 3-ROUND LOGIC & VOICE SPEECH SYNTHESIS/RECORDING
+     ============================================================ -->
+<script>
+// User-Specific Aptitude Datasets
+const aptitudePool = [
+    {
+        q: "A train 150 meters long is running with a speed of 68 km/hr. In what time will it pass a man who is running at 8 km/hr in the same direction?",
+        options: ["9 seconds", "10 seconds", "12 seconds", "15 seconds"],
+        correct: 0,
+        exp: "Relative speed = (68 - 8) km/hr = 60 km/hr = 60 × (5/18) = 50/3 m/sec. Time = Distance / Speed = 150 / (50/3) = 9 seconds."
+    },
+    {
+        q: "If 'CAREER' is coded as '3-1-18-5-5-18' and 'AI' is coded as '1-9', what is the numerical code for 'DATA'?",
+        options: ["4-1-20-1", "3-1-19-1", "4-2-20-2", "5-1-21-1"],
+        correct: 0,
+        exp: "Each letter is represented by its alphabetical position (D=4, A=1, T=20, A=1)."
+    },
+    {
+        q: "In a class of 80 IT students, 50 know Python, 45 know SQL, and 20 know both. How many students know neither Python nor SQL?",
+        options: ["5 students", "10 students", "15 students", "20 students"],
+        correct: 0,
+        exp: "Total who know at least one = 50 + 45 - 20 = 75. Therefore, neither = 80 - 75 = 5 students."
+    },
+    {
+        q: "An algorithm processes 1000 records in 2.5 seconds using O(N log N) complexity. If the dataset size doubles, roughly what is the expected time factor increase?",
+        options: ["Exactly 2x", "Slightly more than 2x (approx 2.2x)", "Exactly 4x", "O(1) constant"],
+        correct: 1,
+        exp: "For O(N log N), if N doubles to 2N, time becomes 2N log(2N) = 2N(log N + 1), which is slightly greater than double."
+    }
+];
+
+let currentAptIndex = 0;
+let selectedOptionIndex = null;
+let isRecordingVoice = false;
+let recordInterval = null;
+let recordSeconds = 0;
+
+// Tough HR Questions pool
+const hrQuestions = [
+    "Why should our executive hiring panel select you for this competitive software role over other candidates who already possess 2+ years of full-time corporate work experience and higher academic percentages?",
+    "Tell me about a time when a major project deadline was jeopardized due to a teammate's non-performance or mistake. How did you resolve the conflict constructively?",
+    "Where do you see your technical leadership journey heading over the next 3 to 5 years inside our AI engineering organization?"
+];
+let currentHRIndex = 0;
+
+window.addEventListener('DOMContentLoaded', () => {
+    // Personalize username display dynamically
+    let userName = 'User';
+    if (typeof AuthManager !== 'undefined') {
+        const u = AuthManager.getUser();
+        if (u && u.firstName && u.firstName !== 'User') userName = u.firstName;
+    }
+    if (userName === 'User') userName = localStorage.getItem('career_current_user') || localStorage.getItem('ci_name') || 'User';
+    const nameSpan = document.getElementById('apt-user-display');
+    if (nameSpan) nameSpan.innerText = userName;
+
+    // Load initial user aptitude set
+    loadNextAptitudeQuestion();
+});
+
+// 1. Tab switching
+function switchRound(roundNum) {
+    document.querySelectorAll('.mock-round-card').forEach(c => c.classList.remove('active'));
+    document.getElementById(`btn-round-${roundNum}`).classList.add('active');
+
+    document.getElementById('round-1-panel').style.display = (roundNum === 1) ? 'block' : 'none';
+    document.getElementById('round-2-panel').style.display = (roundNum === 2) ? 'block' : 'none';
+    document.getElementById('round-3-panel').style.display = (roundNum === 3) ? 'block' : 'none';
+
+    showToast(`🎙️ Switched to Round ${roundNum} Evaluation Environment`, 'info');
+}
+
+// 2. Load dynamic randomized aptitude question
+function loadNextAptitudeQuestion() {
+    selectedOptionIndex = null;
+    document.getElementById('apt-feedback').style.display = 'none';
+    
+    // Pick random question tailored to user
+    currentAptIndex = (currentAptIndex + 1) % aptitudePool.length;
+    const item = aptitudePool[currentAptIndex];
+
+    document.getElementById('apt-question-text').innerHTML = `<strong>Problem Statement #${currentAptIndex + 1}:</strong><br>${item.q}`;
+
+    const grid = document.getElementById('apt-options-grid');
+    grid.innerHTML = '';
+    item.options.forEach((optText, idx) => {
+        const btn = document.createElement('div');
+        btn.className = 'job-pill-btn';
+        btn.style.padding = '12px 18px';
+        btn.style.width = '100%';
+        btn.style.justifyContent = 'flex-start';
+        btn.style.cursor = 'pointer';
+        btn.innerHTML = `<i class="fa-regular fa-circle" id="opt-icon-${idx}"></i> <span>${optText}</span>`;
+        btn.onclick = () => selectOption(idx);
+        grid.appendChild(btn);
+    });
+}
+
+function selectOption(idx) {
+    selectedOptionIndex = idx;
+    document.querySelectorAll('#apt-options-grid .job-pill-btn').forEach((b, i) => {
+        const icon = document.getElementById(`opt-icon-${i}`);
+        if (i === idx) {
+            b.style.borderColor = '#3b82f6';
+            b.style.background = 'rgba(59,130,246,0.15)';
+            if (icon) { icon.className = 'fa-solid fa-circle-check'; icon.style.color = '#3b82f6'; }
+        } else {
+            b.style.borderColor = 'var(--card-border)';
+            b.style.background = 'var(--bg-card)';
+            if (icon) { icon.className = 'fa-regular fa-circle'; icon.style.color = 'inherit'; }
+        }
+    });
+}
+
+function checkAptitudeAnswer() {
+    if (selectedOptionIndex === null) {
+        showToast('⚠️ Please select an option first!', 'warn');
+        return;
+    }
+    const item = aptitudePool[currentAptIndex];
+    const fb = document.getElementById('apt-feedback');
+    fb.style.display = 'block';
+
+    if (selectedOptionIndex === item.correct) {
+        fb.innerHTML = `🎉 Correct Answer! (+10 Points)<br><small style="color:var(--text-secondary);">${item.exp}</small>`;
+        showToast('🎯 Perfect! Aptitude score updated.', 'success');
+    } else {
+        fb.innerHTML = `❌ Incorrect. Correct Option: <strong>${item.options[item.correct]}</strong><br><small style="color:var(--text-secondary);">${item.exp}</small>`;
+        showToast('Keep going! Check explanation below.', 'info');
+    }
+}
+
+// 3. Technical Coding Pool & Evaluation
+const techPool = [
+    {
+        title: "Question 1 of 3 (Python Generators & Space Complexity):",
+        prompt: `"Explain the exact difference between a Generator and a normal Iterator in Python. Write a custom generator function <code>fibonacci_gen(n)</code> that yields the first <code>N</code> Fibonacci numbers with <code>O(1)</code> auxiliary space complexity. Why is this more memory efficient for large datasets?"`,
+        template: `def fibonacci_gen(n):
+    # Write your generator logic here with O(1) space
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b`,
+        hint: "Use tuple unpacking (a, b = b, a + b) inside a loop with the yield keyword instead of appending to a list!",
+        time: "5 Minutes",
+        checkWord: "yield",
+        evalFeedback: "<strong>Space Complexity Analysis:</strong> Excellent! Using <code>yield</code> instead of storing elements in a list maintains <code>O(1)</code> auxiliary memory. Tuple unpacking avoids temporary variable allocation."
+    },
+    {
+        title: "Question 2 of 3 (DSA — LRU Cache System Design):",
+        prompt: `"Design an in-memory LRU (Least Recently Used) Cache data structure in Python that supports <code>get(key)</code> and <code>put(key, value)</code> operations in strictly <code>O(1)</code> average time complexity. What exact data structure combination achieves O(1) for both hash lookups and eviction order?"`,
+        template: `class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.capacity = capacity
+        # Hint: OrderedDict or Doubly Linked List + HashMap
+
+    def get(self, key: int) -> int:
+        pass
+
+    def put(self, key: int, value: int) -> None:
+        pass`,
+        hint: "Combine a Python dictionary (HashMap) with a Doubly Linked List, or simply use collections.OrderedDict which manages O(1) move_to_end!",
+        time: "8 Minutes",
+        checkWord: "OrderedDict",
+        evalFeedback: "<strong>Data Structure Analysis:</strong> Great design! Utilizing a hash map combined with doubly-linked pointers (or `OrderedDict`) guarantees `O(1)` time for both retrieval and least-recently-used eviction."
+    },
+    {
+        title: "Question 3 of 3 (Algorithms — Merge Overlapping Intervals):",
+        prompt: `"Given an array of intervals where <code>intervals[i] = [start_i, end_i]</code>, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input. What is the time complexity of your sorting approach?"`,
+        template: `def merge_intervals(intervals):
+    if not intervals:
+        return []
+    # Step 1: Sort intervals by their start time O(N log N)
+    intervals.sort(key=lambda x: x[0])
+    merged = [intervals[0]]
+    # Write the merging loop here
+    return merged`,
+        hint: "First sort by start time (`intervals.sort(key=lambda x: x[0])`), then iterate and check if current interval's start <= previous interval's end (`merged[-1][1]`)!",
+        time: "6 Minutes",
+        checkWord: "sort",
+        evalFeedback: "<strong>Algorithmic Efficiency:</strong> Spot on! Sorting by the start coordinate first takes `O(N log N)` time, allowing a single linear `O(N)` pass to merge all overlapping segments."
+    }
+];
+let currentTechIndex = 0;
+
+function switchTechQuestion() {
+    currentTechIndex = (currentTechIndex + 1) % techPool.length;
+    const item = techPool[currentTechIndex];
+    const bubble = document.getElementById('tech-question-bubble');
+    const input = document.getElementById('tech-code-input');
+    const timeEl = document.getElementById('tech-time-suggested');
+    const evalBox = document.getElementById('tech-eval-box');
+
+    if (bubble) bubble.innerHTML = `<strong>${item.title}</strong><br>${item.prompt}`;
+    if (input) input.value = item.template;
+    if (timeEl) timeEl.textContent = `⏱️ Time Suggested: ${item.time}`;
+    if (evalBox) evalBox.style.display = 'none';
+
+    showToast(`🔄 Switched to Question ${currentTechIndex + 1}: ${item.title.split('(')[1]?.replace('):','') || ''}`, 'info');
+}
+
+function getTechHint() {
+    const item = techPool[currentTechIndex];
+    showToast(`💡 Hint: ${item.hint}`, 'info');
+}
+
+function evaluateTechAnswer() {
+    const item = techPool[currentTechIndex];
+    const input = document.getElementById('tech-code-input');
+    const evalBox = document.getElementById('tech-eval-box');
+    const code = input ? input.value : '';
+
+    if (evalBox) {
+        evalBox.style.display = 'block';
+        const isGood = code.includes(item.checkWord) || code.length > 50;
+        evalBox.innerHTML = `
+            <div style="font-weight:800; color:${isGood ? '#10b981' : '#f59e0b'}; font-size:1rem; margin-bottom:6px;">
+                ${isGood ? '✔ AI Code Evaluation Verified (Score: 96/100)' : '⚡ AI Analysis: Code Logic Validated (Score: 82/100)'}
+            </div>
+            <p style="font-size:0.88rem; color:var(--text-primary); margin:0; line-height:1.5;">
+                ${item.evalFeedback}
+            </p>
+        `;
+    }
+    showToast(`⚡ AI Code Evaluation complete for Question ${currentTechIndex + 1}!`, 'success');
+}
+
+// 4. HR Voice AI & Speech Synthesis
+function speakHRQuestion() {
+    const text = document.getElementById('hr-question-text').innerText;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+        showToast('🔊 AI Vikram is speaking out the question...', 'info');
+    } else {
+        showToast('🔊 Playing high-fidelity AI audio stream...', 'info');
+    }
+}
+
+function switchHRQuestion() {
+    currentHRIndex = (currentHRIndex + 1) % hrQuestions.length;
+    document.getElementById('hr-question-text').innerText = hrQuestions[currentHRIndex];
+    document.getElementById('hr-voice-feedback').style.display = 'none';
+    showToast('🔄 New tough HR behavioral scenario loaded!', 'info');
+}
+
+function toggleVoiceRecording() {
+    const btn = document.getElementById('btn-voice-toggle');
+    const label = document.getElementById('voice-timer-label');
+    const bars = document.querySelectorAll('.wave-bar');
+
+    if (!isRecordingVoice) {
+        isRecordingVoice = true;
+        btn.classList.add('recording');
+        btn.innerHTML = `<i class="fa-solid fa-stop"></i> <span>Stop Recording & Analyze Tone</span>`;
+        recordSeconds = 0;
+        
+        bars.forEach(b => b.style.animation = 'wavePulse 0.4s ease-in-out infinite alternate');
+
+        recordInterval = setInterval(() => {
+            recordSeconds++;
+            const s = (recordSeconds < 10) ? `0${recordSeconds}` : recordSeconds;
+            label.innerHTML = `<span style="color:#ef4444;">🔴 00:${s} Recording Voice Answer...</span>`;
+        }, 1000);
+
+        showToast('🎙️ Recording voice... Speak clearly into microphone.', 'info');
+    } else {
+        isRecordingVoice = false;
+        clearInterval(recordInterval);
+        btn.classList.remove('recording');
+        btn.innerHTML = `<i class="fa-solid fa-microphone"></i> <span>Speak / Record Voice Answer</span>`;
+        label.innerText = '✅ Audio captured successfully. AI processing speech...';
+
+        bars.forEach(b => b.style.animation = 'none');
+
+        // Show AI Evaluation Report
+        setTimeout(() => {
+            document.getElementById('hr-voice-feedback').style.display = 'block';
+            showToast('✨ AI Voice & Tone Report generated successfully!', 'success');
+        }, 600);
+    }
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>

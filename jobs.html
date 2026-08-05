@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recommendations — CareerInfinity AI</title>
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="jobs-root">
+
+<div class="dash-wrap">
+
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <aside class="sidebar">
+        <div>
+            <div class="sb-brand">
+                <div class="sb-logo">🧠</div>
+                <div class="sb-brand-text">
+                    <h2>CareerInfinity</h2>
+                    <small>AI POWERED</small>
+                </div>
+            </div>
+
+            <div class="sb-section">Main Menu</div>
+            <nav class="sb-nav">
+                <a href="dashboard.html" class="sb-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+                <a href="careers.html" class="sb-link"><i class="fa-solid fa-microchip"></i><span>Career Intelligence</span></a>
+                <a href="skills.html" class="sb-link"><i class="fa-solid fa-chart-line"></i><span>Skill Analysis</span></a>
+                <a href="learning.html" class="sb-link"><i class="fa-solid fa-graduation-cap"></i><span>Learning Path</span></a>
+                <a href="resume.html" class="sb-link"><i class="fa-regular fa-file-lines"></i><span>Resume Analyzer</span></a>
+                <a href="mockinterview.html" class="sb-link"><i class="fa-solid fa-clipboard-question"></i><span>Mock Interview</span></a>
+                <a href="jobs.html" class="sb-link active"><i class="fa-solid fa-briefcase"></i><span>Job Recommendations</span></a>
+                <a href="placements.html" class="sb-link"><i class="fa-solid fa-building-circle-check"></i><span>Placement Drives</span></a>
+            </nav>
+
+            <div class="sb-section" style="margin-top:0.5rem;">Tools</div>
+            <nav class="sb-nav">
+                <a href="assessments.html" class="sb-link"><i class="fa-solid fa-check-to-slot"></i><span>Assessments</span></a>
+                <a href="certificates.html" class="sb-link"><i class="fa-solid fa-certificate"></i><span>Certificates</span></a>
+                <a href="ideas.html" class="sb-link"><i class="fa-solid fa-lightbulb"></i><span>Ideas Lab</span></a>
+            </nav>
+        </div>
+
+        <div>
+            <nav class="sb-nav" style="margin-bottom:0.75rem;">
+                <a href="#" class="sb-link"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+                <a href="#" class="sb-link"><i class="fa-regular fa-circle-question"></i><span>Help & Support</span></a>
+            </nav>
+            <div class="sb-promo">
+                <h4>Upgrade to Premium ✦</h4>
+                <p>Advanced AI insights, priority prep, and direct HR referral tracking.</p>
+                <button class="btn-promo" onclick="showToast('⚡ Premium AI unlocked for Springboard project!','success');">Upgrade Now</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT AREA ===== -->
+    <main class="main-area">
+
+        <!-- TOP HEADER NAVBAR -->
+        <header class="top-bar">
+            <div class="searchbar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search roles, skills, companies..." autocomplete="off">
+            </div>
+
+            <div class="bar-right">
+                <!-- THEME TOGGLE -->
+                <button class="theme-toggle-btn" title="Toggle Light/Dark Mode">
+                    <span class="toggle-icon">☀️</span>
+                    <span class="toggle-label">Light Mode</span>
+                </button>
+
+                <button class="notif-btn" title="Notifications" onclick="showToast('💼 3 new verified roles match your Python & SQL profile!','info')">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge"></span>
+                </button>
+
+                <div class="profile-pill" id="profile-pill">
+                    <div class="pill-av" data-user-initial>A</div>
+                    <div>
+                        <div class="pill-name">Hi, <span data-user-firstname>Ananya</span></div><div class="pill-role" data-user-role>B.Sc. IT Student</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;color:var(--text-muted);margin-left:6px;"></i>
+
+                    <!-- Dropdown -->
+                    <div class="pill-dropdown" id="pill-dropdown">
+                        <div class="dd-top">
+                            <div class="dd-name-txt" data-user-name>Ananya Sharma</div>
+                            <div class="dd-email-txt" data-user-email>ananya.sharma@infosys.edu</div>
+                        </div>
+                        <a href="dashboard.html" class="dd-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+                        <a href="skills.html" class="dd-item"><i class="fa-solid fa-chart-line"></i> Skill Analysis</a>
+                        <a href="index.html" class="dd-item"><i class="fa-solid fa-rotate-left"></i> Switch SSO Account</a>
+                        <a href="#" class="dd-item red" id="btn-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN PAGE CONTAINER -->
+        <div class="ci-page-content" style="padding-top: 0.75rem;">
+
+            <!-- PAGE TITLE HEADER -->
+            <div style="margin-bottom: 1.5rem;">
+                <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.5px;">Job Recommendations</h1>
+                <p style="font-size: 0.92rem; color: var(--text-secondary);">AI matched jobs for your profile</p>
+            </div>
+
+            <!-- TOP FILTER & SEARCH ROW -->
+            <div class="filter-row-jobs" style="position:relative; z-index:50;">
+                <div class="filter-left-pills">
+                    <div style="position:relative; display:inline-block;">
+                        <button class="job-pill-btn" id="pill-location" onclick="toggleFilterMenu('location')">
+                            <i class="fa-solid fa-location-dot" style="color:#3b82f6;"></i> <span id="lbl-location">Location</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:4px;"></i>
+                        </button>
+                        <div class="job-filter-dropdown" id="dd-location">
+                            <div onclick="selectFilter('location', 'All')">🌍 All Locations</div>
+                            <div onclick="selectFilter('location', 'Bangalore')">📍 Bangalore</div>
+                            <div onclick="selectFilter('location', 'Hyderabad')">📍 Hyderabad</div>
+                            <div onclick="selectFilter('location', 'Chennai')">📍 Chennai</div>
+                            <div onclick="selectFilter('location', 'Pune')">📍 Pune</div>
+                            <div onclick="selectFilter('location', 'Mumbai')">📍 Mumbai</div>
+                            <div onclick="selectFilter('location', 'Delhi NCR')">📍 Delhi NCR</div>
+                            <div onclick="selectFilter('location', 'Remote')">🏠 Remote Only</div>
+                        </div>
+                    </div>
+
+                    <div style="position:relative; display:inline-block;">
+                        <button class="job-pill-btn" id="pill-salary" onclick="toggleFilterMenu('salary')">
+                            <i class="fa-solid fa-indian-rupee-sign" style="color:#10b981;"></i> <span id="lbl-salary">Salary</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:4px;"></i>
+                        </button>
+                        <div class="job-filter-dropdown" id="dd-salary">
+                            <div onclick="selectFilter('salary', 'All')">💰 All Salaries</div>
+                            <div onclick="selectFilter('salary', '4-6')">💵 ₹4 - ₹6 LPA</div>
+                            <div onclick="selectFilter('salary', '6-10')">💵 ₹6 - ₹10 LPA</div>
+                            <div onclick="selectFilter('salary', '10-18')">💵 ₹10 - ₹18 LPA</div>
+                            <div onclick="selectFilter('salary', '18+')">🚀 ₹18+ LPA (Premium)</div>
+                        </div>
+                    </div>
+
+                    <div style="position:relative; display:inline-block;">
+                        <button class="job-pill-btn" id="pill-experience" onclick="toggleFilterMenu('experience')">
+                            <i class="fa-solid fa-graduation-cap" style="color:#f59e0b;"></i> <span id="lbl-experience">Experience</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:4px;"></i>
+                        </button>
+                        <div class="job-filter-dropdown" id="dd-experience">
+                            <div onclick="selectFilter('experience', 'All')">🎓 All Experience Levels</div>
+                            <div onclick="selectFilter('experience', '0-1')">🌱 0-1 yrs (Freshers/Interns)</div>
+                            <div onclick="selectFilter('experience', '0-2')">🚀 0-2 yrs (Entry Level)</div>
+                            <div onclick="selectFilter('experience', '1-3')">⚡ 1-3 yrs (Junior/Associate)</div>
+                            <div onclick="selectFilter('experience', '2-5')">🔥 2-5 yrs (Mid-Senior)</div>
+                        </div>
+                    </div>
+
+                    <div style="position:relative; display:inline-block;">
+                        <button class="job-pill-btn" id="pill-remote" onclick="toggleFilterMenu('remote')">
+                            <i class="fa-solid fa-house-laptop" style="color:#8b5cf6;"></i> <span id="lbl-remote">Remote</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:4px;"></i>
+                        </button>
+                        <div class="job-filter-dropdown" id="dd-remote">
+                            <div onclick="selectFilter('remote', 'All')">🌐 All Workplaces</div>
+                            <div onclick="selectFilter('remote', 'Remote')">🏠 100% Remote</div>
+                            <div onclick="selectFilter('remote', 'Hybrid')">🔀 Hybrid (2-3 Days Office)</div>
+                            <div onclick="selectFilter('remote', 'On-Site')">🏢 On-Site Office</div>
+                        </div>
+                    </div>
+
+                    <div style="position:relative; display:inline-block;">
+                        <button class="job-pill-btn" id="pill-company" onclick="toggleFilterMenu('company')">
+                            <i class="fa-solid fa-building" style="color:#06b6d4;"></i> <span id="lbl-company">Company</span> <i class="fa-solid fa-chevron-down" style="font-size:0.7rem; margin-left:4px;"></i>
+                        </button>
+                        <div class="job-filter-dropdown" id="dd-company" style="max-height:280px; overflow-y:auto; width:220px;">
+                            <div onclick="selectFilter('company', 'All')">🏢 All Companies (25+)</div>
+                            <div onclick="selectFilter('company', 'Infosys')">🔷 Infosys (3 Roles)</div>
+                            <div onclick="selectFilter('company', 'TCS')">🔶 TCS (3 Roles)</div>
+                            <div onclick="selectFilter('company', 'Zoho')">🟥 Zoho (3 Roles)</div>
+                            <div onclick="selectFilter('company', 'Google')">🟢 Google (2 Roles)</div>
+                            <div onclick="selectFilter('company', 'Microsoft')">🟦 Microsoft (2 Roles)</div>
+                            <div onclick="selectFilter('company', 'Amazon')">🟧 Amazon (2 Roles)</div>
+                            <div onclick="selectFilter('company', 'Wipro')">🟣 Wipro (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Accenture')">🟪 Accenture (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Cognizant')">🟨 Cognizant (1 Role)</div>
+                            <div onclick="selectFilter('company', 'HCLTech')">🟦 HCLTech (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Swiggy')">🟧 Swiggy (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Razorpay')">🔷 Razorpay (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Flipkart')">🟨 Flipkart (1 Role)</div>
+                            <div onclick="selectFilter('company', 'Zomato')">🟥 Zomato (1 Role)</div>
+                            <div onclick="selectFilter('company', 'IBM')">🟦 IBM (1 Role)</div>
+                        </div>
+                    </div>
+
+                    <button class="job-pill-btn" onclick="resetAllFilters()" style="background:rgba(239,68,68,0.12); color:#f87171; border-color:rgba(239,68,68,0.3); font-weight:700;">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+
+                <div class="job-search-pill">
+                    <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted); font-size:0.85rem;"></i>
+                    <input type="text" id="job-search-input" placeholder="Search roles, skills, companies..." autocomplete="off" oninput="applyJobFilters()">
+                </div>
+            </div>
+
+            <!-- ACTIVE FILTERS SUMMARY -->
+            <div id="active-filters-bar" style="display:none; align-items:center; gap:10px; margin-bottom:1rem; font-size:0.86rem; color:var(--text-secondary); flex-wrap:wrap;">
+                <span style="font-weight:700; color:#38bdf8;">🔥 Active Filters:</span>
+                <span id="active-tags-list" style="display:flex; gap:8px; flex-wrap:wrap;"></span>
+            </div>
+
+            <!-- 3-COLUMN JOB CARD GRID -->
+            <div class="job-grid-3" id="jobs-grid-container" style="min-height:300px;">
+                <!-- Dynamically populated by JavaScript -->
+            </div>
+
+            <!-- BOTTOM RECOMMENDATION EXPLANATION BAR -->
+            <div class="rec-reason-bar" style="margin-top:2rem;">
+                <span style="font-size: 0.92rem; font-weight: 700; color: var(--text-secondary);">Recommended because:</span>
+                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                    <span class="rec-reason-pill"><i class="fa-solid fa-briefcase" style="color:#10b981;"></i> Your Skills</span>
+                    <span class="rec-reason-pill"><i class="fa-regular fa-file-lines" style="color:#3b82f6;"></i> Resume (<span id="jobs-user-display" data-user-firstname>User</span>)</span>
+                    <span class="rec-reason-pill"><i class="fa-solid fa-shield-halved" style="color:#8b5cf6;"></i> Interests</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- end ci-page-content -->
+
+    </main>
+</div>
+
+<!-- STYLES FOR DROPDOWN MENUS -->
+<style>
+.job-filter-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #0f172a;
+    border: 1.5px solid var(--card-border);
+    border-radius: 12px;
+    padding: 6px;
+    z-index: 1000;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    min-width: 180px;
+    backdrop-filter: blur(10px);
+}
+.job-filter-dropdown div {
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+.job-filter-dropdown div:hover {
+    background: rgba(59, 130, 246, 0.2);
+    color: #38bdf8;
+}
+.job-pill-btn.active-filter {
+    background: rgba(59, 130, 246, 0.2) !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+}
+</style>
+
+<script src="app.js"></script>
+<script>
+const allJobsDatabase = [
+    { id: 1, company: 'Infosys', logoClass: 'logo-infosys', role: 'AI & Machine Learning Engineer', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '5-8 LPA', salVal: 6.5, remote: 'Hybrid', match: 92 },
+    { id: 2, company: 'Infosys', logoClass: 'logo-infosys', role: 'Python Backend Developer', location: 'Hyderabad', exp: '0-2 yrs', expKey: '0-2', sal: '6-9 LPA', salVal: 7.5, remote: 'Remote', match: 89 },
+    { id: 3, company: 'Infosys', logoClass: 'logo-infosys', role: 'Cloud DevOps Specialist', location: 'Pune', exp: '1-3 yrs', expKey: '1-3', sal: '7-11 LPA', salVal: 9, remote: 'Hybrid', match: 86 },
+    { id: 4, company: 'TCS', logoClass: 'logo-tcs', role: 'Software Engineer / Systems Analyst', location: 'Chennai', exp: '0-2 yrs', expKey: '0-2', sal: '4-7 LPA', salVal: 5.5, remote: 'On-Site', match: 90 },
+    { id: 5, company: 'TCS', logoClass: 'logo-tcs', role: 'Data Analyst / BI Specialist', location: 'Bangalore', exp: '0-1 yrs', expKey: '0-1', sal: '4-6 LPA', salVal: 5, remote: 'Hybrid', match: 84 },
+    { id: 6, company: 'TCS', logoClass: 'logo-tcs', role: 'Cybersecurity Associate', location: 'Hyderabad', exp: '1-3 yrs', expKey: '1-3', sal: '6-9 LPA', salVal: 7.5, remote: 'Remote', match: 81 },
+    { id: 7, company: 'Zoho', logoClass: 'logo-zoho', role: 'Full Stack Web Developer', location: 'Chennai', exp: '0-2 yrs', expKey: '0-2', sal: '5-8 LPA', salVal: 6.5, remote: 'Hybrid', match: 88 },
+    { id: 8, company: 'Zoho', logoClass: 'logo-zoho', role: 'Product Designer / UI UX Engineer', location: 'Chennai', exp: '0-2 yrs', expKey: '0-2', sal: '6-10 LPA', salVal: 8, remote: 'On-Site', match: 85 },
+    { id: 9, company: 'Zoho', logoClass: 'logo-zoho', role: 'Data Scientist / ML Researcher', location: 'Remote', exp: '1-3 yrs', expKey: '1-3', sal: '8-14 LPA', salVal: 11, remote: 'Remote', match: 83 },
+    { id: 10, company: 'Google', logoClass: 'logo-infosys', role: 'Software Engineer III - Core ML', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '18-28 LPA', salVal: 23, remote: 'Hybrid', match: 95 },
+    { id: 11, company: 'Google', logoClass: 'logo-infosys', role: 'Cloud Solutions Architect', location: 'Hyderabad', exp: '2-5 yrs', expKey: '2-5', sal: '22-35 LPA', salVal: 28, remote: 'Hybrid', match: 91 },
+    { id: 12, company: 'Microsoft', logoClass: 'logo-tcs', role: 'Software Development Engineer (SDE I)', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '16-24 LPA', salVal: 20, remote: 'Hybrid', match: 94 },
+    { id: 13, company: 'Microsoft', logoClass: 'logo-tcs', role: 'AI Copilot Research Intern', location: 'Hyderabad', exp: '0-1 yrs', expKey: '0-1', sal: '12-16 LPA', salVal: 14, remote: 'Remote', match: 93 },
+    { id: 14, company: 'Amazon', logoClass: 'logo-zoho', role: 'SDE I - AWS Cloud Infrastructure', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '15-22 LPA', salVal: 18.5, remote: 'Hybrid', match: 90 },
+    { id: 15, company: 'Amazon', logoClass: 'logo-zoho', role: 'Business Intelligence Engineer', location: 'Chennai', exp: '1-3 yrs', expKey: '1-3', sal: '12-18 LPA', salVal: 15, remote: 'On-Site', match: 86 },
+    { id: 16, company: 'Wipro', logoClass: 'logo-infosys', role: 'GenAI Developer Associate', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '5-8 LPA', salVal: 6.5, remote: 'Hybrid', match: 87 },
+    { id: 17, company: 'Accenture', logoClass: 'logo-tcs', role: 'Advanced Technology Specialist', location: 'Pune', exp: '0-2 yrs', expKey: '0-2', sal: '6-9 LPA', salVal: 7.5, remote: 'Hybrid', match: 88 },
+    { id: 18, company: 'Cognizant', logoClass: 'logo-zoho', role: 'Digital Engineering Analyst', location: 'Chennai', exp: '0-1 yrs', expKey: '0-1', sal: '4-6 LPA', salVal: 5, remote: 'On-Site', match: 82 },
+    { id: 19, company: 'HCLTech', logoClass: 'logo-infosys', role: 'Full Stack Engineer (React/Node)', location: 'Delhi NCR', exp: '1-3 yrs', expKey: '1-3', sal: '6-10 LPA', salVal: 8, remote: 'Remote', match: 84 },
+    { id: 20, company: 'Swiggy', logoClass: 'logo-tcs', role: 'Data Scientist - Logistics AI', location: 'Bangalore', exp: '1-3 yrs', expKey: '1-3', sal: '14-20 LPA', salVal: 17, remote: 'Hybrid', match: 89 },
+    { id: 21, company: 'Razorpay', logoClass: 'logo-zoho', role: 'Backend Systems Engineer (Golang)', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '15-22 LPA', salVal: 18.5, remote: 'Hybrid', match: 91 },
+    { id: 22, company: 'Flipkart', logoClass: 'logo-infosys', role: 'SDE - Search & Recommendations', location: 'Bangalore', exp: '1-3 yrs', expKey: '1-3', sal: '16-25 LPA', salVal: 20.5, remote: 'Hybrid', match: 92 },
+    { id: 23, company: 'Zomato', logoClass: 'logo-tcs', role: 'Mobile App Developer (Flutter/iOS)', location: 'Delhi NCR', exp: '0-2 yrs', expKey: '0-2', sal: '12-18 LPA', salVal: 15, remote: 'On-Site', match: 85 },
+    { id: 24, company: 'IBM', logoClass: 'logo-zoho', role: 'Quantum & Cloud Research Associate', location: 'Bangalore', exp: '0-2 yrs', expKey: '0-2', sal: '9-14 LPA', salVal: 11.5, remote: 'Remote', match: 87 },
+    { id: 25, company: 'Tech Mahindra', logoClass: 'logo-infosys', role: 'AI Automation Specialist', location: 'Hyderabad', exp: '0-2 yrs', expKey: '0-2', sal: '5-7 LPA', salVal: 6, remote: 'Hybrid', match: 81 }
+];
+
+let activeFilters = {
+    location: 'All',
+    salary: 'All',
+    experience: 'All',
+    remote: 'All',
+    company: 'All',
+    search: ''
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.filter-left-pills')) {
+            document.querySelectorAll('.job-filter-dropdown').forEach(dd => dd.style.display = 'none');
+        }
+    });
+    applyJobFilters();
+});
+
+function toggleFilterMenu(filterType) {
+    // Close other dropdowns
+    document.querySelectorAll('.job-filter-dropdown').forEach(dd => {
+        if (dd.id !== `dd-${filterType}`) dd.style.display = 'none';
+    });
+    const target = document.getElementById(`dd-${filterType}`);
+    if (target) {
+        target.style.display = target.style.display === 'block' ? 'none' : 'block';
+    }
+}
+
+function selectFilter(filterType, val) {
+    activeFilters[filterType] = val;
+    const dd = document.getElementById(`dd-${filterType}`);
+    if (dd) dd.style.display = 'none';
+
+    // Update label text
+    const lbl = document.getElementById(`lbl-${filterType}`);
+    const pill = document.getElementById(`pill-${filterType}`);
+    if (lbl && pill) {
+        if (val === 'All') {
+            lbl.textContent = filterType.charAt(0).toUpperCase() + filterType.slice(1);
+            pill.classList.remove('active-filter');
+        } else {
+            lbl.textContent = val;
+            pill.classList.add('active-filter');
+        }
+    }
+
+    // Per user request: when selecting company or any filter, dynamically update display
+    applyJobFilters();
+    showToast(`✨ Filtered jobs by ${filterType.toUpperCase()}: ${val === 'All' ? 'Showing all' : val}`, 'info');
+}
+
+function resetAllFilters() {
+    activeFilters = { location: 'All', salary: 'All', experience: 'All', remote: 'All', company: 'All', search: '' };
+    const searchInp = document.getElementById('job-search-input');
+    if (searchInp) searchInp.value = '';
+
+    ['location', 'salary', 'experience', 'remote', 'company'].forEach(k => {
+        const lbl = document.getElementById(`lbl-${k}`);
+        const pill = document.getElementById(`pill-${k}`);
+        if (lbl) lbl.textContent = k.charAt(0).toUpperCase() + k.slice(1);
+        if (pill) pill.classList.remove('active-filter');
+    });
+
+    applyJobFilters();
+    showToast('🔄 All job filters reset successfully!', 'success');
+}
+
+function applyJobFilters() {
+    const searchVal = (document.getElementById('job-search-input')?.value || '').toLowerCase().trim();
+    activeFilters.search = searchVal;
+
+    // Filter array
+    const filtered = allJobsDatabase.filter(job => {
+        // Company
+        if (activeFilters.company !== 'All' && job.company.toLowerCase() !== activeFilters.company.toLowerCase()) return false;
+        // Location
+        if (activeFilters.location !== 'All' && !job.location.toLowerCase().includes(activeFilters.location.toLowerCase())) return false;
+        // Remote
+        if (activeFilters.remote !== 'All' && job.remote.toLowerCase() !== activeFilters.remote.toLowerCase()) return false;
+        // Experience
+        if (activeFilters.experience !== 'All' && !job.expKey.includes(activeFilters.experience)) return false;
+        // Salary
+        if (activeFilters.salary !== 'All') {
+            if (activeFilters.salary === '4-6' && (job.salVal < 4 || job.salVal > 6.5)) return false;
+            if (activeFilters.salary === '6-10' && (job.salVal < 6 || job.salVal > 10.5)) return false;
+            if (activeFilters.salary === '10-18' && (job.salVal < 10 || job.salVal > 18.5)) return false;
+            if (activeFilters.salary === '18+' && job.salVal < 18) return false;
+        }
+        // Search
+        if (searchVal) {
+            const matchStr = `${job.company} ${job.role} ${job.location} ${job.sal} ${job.remote}`.toLowerCase();
+            if (!matchStr.includes(searchVal)) return false;
+        }
+        return true;
+    });
+
+    // Update active tags bar
+    const bar = document.getElementById('active-filters-bar');
+    const tagsContainer = document.getElementById('active-tags-list');
+    const activeKeys = Object.entries(activeFilters).filter(([k, v]) => v !== 'All' && v !== '');
+    if (bar && tagsContainer) {
+        if (activeKeys.length > 0) {
+            bar.style.display = 'flex';
+            tagsContainer.innerHTML = activeKeys.map(([k, v]) => `
+                <span style="background:rgba(59,130,246,0.18); border:1px solid #3b82f6; color:#e2e8f0; padding:4px 10px; border-radius:14px; font-size:0.78rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+                    ${k.toUpperCase()}: ${v} <i class="fa-solid fa-xmark" style="cursor:pointer; color:#f87171;" onclick="selectFilter('${k}', 'All')"></i>
+                </span>
+            `).join('');
+        } else {
+            bar.style.display = 'none';
+        }
+    }
+
+    // Render Grid
+    const grid = document.getElementById('jobs-grid-container');
+    if (!grid) return;
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align:center; padding: 4rem 1rem; background:var(--bg-card); border:1px dashed var(--card-border); border-radius:18px;">
+                <div style="font-size:3rem; margin-bottom:1rem;">🔍</div>
+                <h3 style="font-size:1.3rem; font-weight:800; color:var(--text-primary); margin-bottom:6px;">No matching job recommendations found</h3>
+                <p style="font-size:0.92rem; color:var(--text-secondary); margin-bottom:1.4rem;">Try adjusting your company, location, or salary filters to view more AI matched roles.</p>
+                <button onclick="resetAllFilters()" style="padding:10px 22px; background:var(--grad-primary); color:#fff; border:none; border-radius:12px; font-weight:800; cursor:pointer;">
+                    🔄 Reset All Filters
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = filtered.map(job => {
+        let logoBg = '#1e293b';
+        let logoText = job.company;
+        if (job.company === 'TCS') { logoBg = '#0284c7'; logoText = 'tcs'; }
+        else if (job.company === 'Zoho') { logoBg = '#dc2626'; logoText = 'Zoho'; }
+        else if (job.company === 'Google') { logoBg = '#16a34a'; logoText = 'Google'; }
+        else if (job.company === 'Microsoft') { logoBg = '#2563eb'; logoText = 'Microsoft'; }
+        else if (job.company === 'Amazon') { logoBg = '#d97706'; logoText = 'Amazon'; }
+        else if (job.company === 'Wipro') { logoBg = '#7c3aed'; logoText = 'Wipro'; }
+        else if (job.company === 'Accenture') { logoBg = '#9333ea'; logoText = 'Accenture'; }
+        else if (job.company === 'Cognizant') { logoBg = '#0d9488'; logoText = 'Cognizant'; }
+        else if (job.company === 'Razorpay') { logoBg = '#0284c7'; logoText = 'Razorpay'; }
+        else if (job.company === 'Swiggy') { logoBg = '#ea580c'; logoText = 'Swiggy'; }
+        else if (job.company === 'Flipkart') { logoBg = '#eab308'; logoText = 'Flipkart'; }
+
+        return `
+            <div class="job-card-s1" style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+                <div>
+                    <div style="display:inline-block; padding:4px 12px; background:${logoBg}; color:#fff; font-weight:900; font-size:0.85rem; border-radius:8px; margin-bottom:12px;">${logoText}</div>
+                    <div class="role-title-s1" style="font-size:1.15rem; font-weight:800; color:var(--text-primary); margin-bottom:6px;">${job.role}</div>
+                    <div class="role-meta-s1" style="display:flex; gap:10px; flex-wrap:wrap; font-size:0.82rem; color:var(--text-secondary); margin-bottom:8px;">
+                        <span><i class="fa-solid fa-location-dot" style="color:#3b82f6;"></i> ${job.location}</span>
+                        <span><i class="fa-solid fa-graduation-cap" style="color:#f59e0b;"></i> ${job.exp}</span>
+                        <span><i class="fa-solid fa-house-laptop" style="color:#8b5cf6;"></i> ${job.remote}</span>
+                    </div>
+                    <div class="role-sal-s1" style="font-size:0.95rem; font-weight:800; color:#10b981; margin-bottom:14px;"><i class="fa-solid fa-indian-rupee-sign"></i> ${job.sal}</div>
+                </div>
+
+                <div style="border-top:1px dashed var(--card-border); padding-top:12px; display:flex; align-items:center; justify-content:space-between; margin-top:auto;">
+                    <div class="ai-match-s1" style="font-size:0.82rem; font-weight:800; color:#38bdf8; background:rgba(56,189,248,0.12); padding:4px 10px; border-radius:8px;"><i class="fa-solid fa-check"></i> AI Match ${job.match}%</div>
+                    <button class="btn-apply-s1" style="padding:8px 18px; background:var(--grad-primary); color:#fff; border:none; border-radius:10px; font-weight:700; font-size:0.86rem; cursor:pointer; transition:all 0.2s;" onclick="showToast('🚀 Applied to ${job.company} (${job.role}) successfully! Profile & verified resume shared with HR.','success')">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+</script>
+</body>
+</html>
